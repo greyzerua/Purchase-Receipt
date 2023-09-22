@@ -151,7 +151,7 @@ td, th {
         font-size: 17px;
     }
 }
-@media (max-width: 456px) {
+@media (max-width: 500px) {
     .cell-product{
         font-size: 17px;
         width: 0%;
