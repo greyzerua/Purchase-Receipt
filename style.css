@@ -152,9 +152,18 @@ td, th {
     }
 }
 @media (max-width: 456px) {
+    .cell-product{
+        font-size: 17px;
+        width: 0%;
+    }
     .table-btn{
         margin-right: 0px;
         margin-bottom: 5px;
-        
+        font-size: 12px;
+        letter-spacing: 0.7px;
+    }
+    .table-btn__color{
+        font-size: 12px;
+        letter-spacing: 0.7px;
     }
 }
