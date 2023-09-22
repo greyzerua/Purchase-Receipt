@@ -1,0 +1,160 @@
+body {
+    background-color: rgb(225, 225, 225);
+}
+.main-title {
+    font-size: 43px;
+    letter-spacing: 10px;
+    color: #5e80cb;
+    font-family: 'IBM Plex Serif', serif;
+}
+.main-block{
+    margin: 0 auto;
+    text-align: center;
+    padding: 70px 0px 10px;
+    width: 100%;
+}
+.main-input{
+    padding: 10px 15px;
+    margin-right: 10px;
+    border-radius: 15px;
+    border: 2px solid rgb(148, 148, 148);
+    font-size: 16px;
+}
+.main-input:last-child {
+    margin-right: 0px;
+}
+.main-input::placeholder {
+    font-size: 15px;
+}
+.main-input:focus {
+    border-color: rgb(58, 161, 27);
+    outline: none;
+}
+
+.main-btn{
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    border: none;
+    background-color: green;
+    transition: 0.3s ease;
+    font-size: 15px;
+}
+.main-btn:hover {
+    background-color: rgb(4, 202, 4);
+}
+.block-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cell-name{
+    color: rgb(113, 140, 205);
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.cell-product{
+    font-size: 20px;
+    color: black;
+    font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+table{
+    background-color: white;
+    border-radius: 4px;
+    padding: 0px;
+    width: 44%;
+    margin: 0 auto;
+    box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.75);
+    margin-top: 40px;
+    table-layout: auto;
+    
+}
+td, th {
+    border: 1px solid #ddd; /* Граничные линии для ячеек */
+    padding: 8px; /* Внутренний отступ */
+    text-align: center; /* Выравнивание текста по левому краю */
+    word-break: break-all;
+}
+
+.table-btn{
+    cursor: pointer;
+    padding: 7px 15px;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    border: none;
+    background-color: green;
+    transition: 0.3s ease;
+    font-size: 15px;
+    margin-right: 5px;
+}
+.table-btn:hover {
+    background-color: rgb(4, 202, 4);
+}
+.table-btn__color{
+    cursor: pointer;
+    padding: 7px 8px;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    border: none;
+    background-color: rgb(191, 0, 0);
+    transition: 0.3s ease;
+    font-size: 15px;
+}
+.table-btn__color:hover {
+    background-color: rgb(255, 6, 6);
+}
+@media (max-width: 1430px) {
+    table{
+        width: 64%; 
+    }
+}
+@media (max-width: 1170px) {
+    table{
+        width: 80%; 
+    }
+}
+@media (max-width: 818px) {
+    table{
+        width: 100%; 
+       
+    }
+    th, td {
+        font-size: 13px;
+        padding: 4px 0px;
+    }
+    .block-input{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .main-input{
+        padding: 10px 75px 7px 8px;
+        margin-right: 0px;
+        margin-bottom: 6px;
+    }
+    .main-btn{
+        font-size: 18px;
+        padding: 10px;
+        width: 229px;
+    }
+    .table-btn{
+        margin-right: 3px;
+        
+    }
+    .cell-product{
+        font-size: 17px;
+    }
+}
+@media (max-width: 456px) {
+    .table-btn{
+        margin-right: 0px;
+        margin-bottom: 5px;
+        
+    }
+}
