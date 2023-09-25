@@ -1,6 +1,5 @@
 let productCounter = 1;
 let totalSum = 0;
-const screenWidth = window.innerWidth;
 const allProducts = [];
 
 let block = document.createElement('div')
