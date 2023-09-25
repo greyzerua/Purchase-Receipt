@@ -1,6 +1,7 @@
+
 let productCounter = 1;
 let totalSum = 0;
-const allProducts = [];
+let allProducts = [];
 
 let block = document.createElement('div')
 let productTable;
@@ -62,7 +63,8 @@ const createProduct = () => {
     productNameInput.value = ''
     quantityInput.value = ''
     priceInput.value = ''
-   
+
+    saveProductsToLocalStorage();
 };
 
 function getTableHeaders() {
@@ -92,8 +94,9 @@ function getTableHeaders() {
 }
 
 function deleteItem(index) {
-    allProducts.splice(index, 1)
-    renderTable(allProducts)
+    allProducts.splice(index, 1);
+    saveProductsToLocalStorage();
+    renderTable(allProducts);
 }
 const changeItem = (index) => {
     allProducts[index] = {
@@ -101,8 +104,8 @@ const changeItem = (index) => {
         quantity: Number(prompt("Введіть кількість товару")),
         price: Number(prompt("Введіть ціну товару"))
     };
+    saveProductsToLocalStorage();
     renderTable(allProducts);
-    console.log('changed', allProducts);
 };
 
 function getTableMobile(index, product) {
@@ -301,3 +304,16 @@ window.addEventListener("resize", () => {
     renderTable(allProducts);
 });
 
+// Загрузка списка продуктов из локального хранилища при загрузке страницы
+window.addEventListener('load', () => {
+    let savedProducts = localStorage.getItem('products');
+    if (savedProducts) {
+        allProducts = JSON.parse(savedProducts);
+        renderTable(allProducts);
+    }
+});
+
+// Функция для сохранения списка продуктов в локальном хранилище
+function saveProductsToLocalStorage() {
+    localStorage.setItem('products', JSON.stringify(allProducts));
+}
