@@ -256,6 +256,12 @@ body {
     .total-text{
         font-size: 21px;
     }
+    .main-input {
+        padding: 10px 2px 10px 10px;
+        width: 98%;
+        margin-right: 0px;
+        margin-bottom: 6px;
+    }
 }
 @media (max-width: 370px) {
     .table-btn{
