@@ -1,12 +1,15 @@
 let productCounter = 1;
 let totalSum = 0;
-
+const screenWidth = window.innerWidth;
 const allProducts = [];
 
 let block = document.createElement('div')
 let productTable;
-let productTableBody;
+let productTableBody  = document.createElement('div');
+productTableBody.classList.add('table-container')
 
+let textBlock;
+let totalBlock;
 block.classList.add('main-block')
 document.body.append(block)
 
@@ -63,37 +66,30 @@ const createProduct = () => {
    
 };
 
-function getTable() {
-    let table = document.createElement('table')
-    let thead = document.createElement('thead')
-    let tr = document.createElement('tr')
-
-    let numberTd = document.createElement('td')
+function getTableHeaders() {
+    let numberTd = document.createElement('div')
     numberTd.textContent = '№'
-    numberTd.classList.add('cell-name')
+    numberTd.classList.add('table-cell')
 
-    let nameTd = document.createElement('td')
+    let nameTd = document.createElement('div')
     nameTd.textContent = 'Назва'
-    nameTd.classList.add('cell-name')
+    nameTd.classList.add('table-cell')
 
-    let quantityTd = document.createElement('td')
+    let quantityTd = document.createElement('div')
     quantityTd.textContent = 'Кіль-сть'
-    quantityTd.classList.add('cell-name')
-    let priceTd = document.createElement('td')
+    quantityTd.classList.add('table-cell')
+    let priceTd = document.createElement('div')
     priceTd.textContent = 'Ціна'
-    priceTd.classList.add('cell-name')
-    let totalPriceTd = document.createElement('td')
+    priceTd.classList.add('table-cell')
+    let totalPriceTd = document.createElement('div')
     totalPriceTd.textContent = 'Загальна сума'
-    totalPriceTd.classList.add('cell-name')
-    let settingsTd = document.createElement('td')
+    totalPriceTd.classList.add('table-cell')
+    let settingsTd = document.createElement('div')
     settingsTd.textContent = 'Налаштування'
-    settingsTd.classList.add('cell-name')
-    tr.append(numberTd, nameTd, quantityTd, priceTd, totalPriceTd, settingsTd)
-    thead.append(tr)
-    table.append(thead)
-    block.append(table)
+    settingsTd.classList.add('table-cell')
     
-    return table
+    productTableBody.append(numberTd, nameTd, quantityTd, priceTd, totalPriceTd, settingsTd)
+
 }
 
 function deleteItem(index) {
@@ -110,20 +106,91 @@ const changeItem = (index) => {
     console.log('changed', allProducts);
 };
 
+function getTableMobile(index, product) {
+    let card = document.createElement('div')
+    card.classList.add('table-container__mobile')
+    let numberTd = document.createElement('div')
+    numberTd.textContent = '№:'
+    numberTd.classList.add('table-cell__mobile')
+
+    let nameTd = document.createElement('div')
+    nameTd.textContent = 'Назва:'
+    nameTd.classList.add('table-cell__mobile')
+
+    let quantityTd = document.createElement('div')
+    quantityTd.textContent = 'Кіль-сть:'
+    quantityTd.classList.add('table-cell__mobile')
+
+    let priceTd = document.createElement('div')
+    priceTd.textContent = 'Ціна:'
+    priceTd.classList.add('table-cell__mobile')
+
+    let totalPriceTd = document.createElement('div')
+    totalPriceTd.textContent = 'Загальна сума:'
+    totalPriceTd.classList.add('table-cell__mobile')
+
+    let settingsTd = document.createElement('div')
+    settingsTd.classList.add('table-cell__mobile')
+
+    let number = document.createElement('div') // Создаем ячейку для номера
+    number.classList.add('cell-product__mobile')
+    number.textContent = index + 1; // Устанавливаем номер продукта
+
+    let name = document.createElement('div')
+    name.classList.add('cell-product__mobile')
+
+    let quantity = document.createElement('div')
+    quantity.classList.add('cell-product__mobile')
+
+    let price = document.createElement('div')
+    price.classList.add('cell-product__mobile')
+
+    let totalPrice = document.createElement('div')
+    totalPrice.classList.add('cell-product__mobile')
+
+    let settings = document.createElement('div')
+    settings.classList.add('cell-product__mobile')
+    settings.classList.add('cell-product__btn')
+    let changeButton = getBtn('Змінити', 'table-btn')
+    let deleteButton = getBtn('Видалити', 'table-btn__color')
+
+    numberTd.append(number)
+    nameTd.append(name)
+    quantityTd.append(quantity)
+    priceTd.append(price)
+    totalPriceTd.append(totalPrice)
+    settingsTd.append(settings)
+    settings.append(changeButton, deleteButton);
+
+    name.textContent = product.name.charAt(0).toUpperCase() + product.name.slice(1);
+    quantity.textContent = product.quantity
+    price.textContent = product.price +' грн'
+    totalPrice.textContent = product.price * product.quantity + ` грн`
+    changeButton.onclick = () => {
+        changeItem(index);
+    }
+    deleteButton.onclick = () => {
+        deleteItem(index);
+    }
+
+    card.append(numberTd, nameTd, quantityTd, priceTd, totalPriceTd, settingsTd)
+    productTableBody.append(card)
+}
+
+
 function getProductTr(index, product) {
-    let tr = document.createElement('tr')
-    let numberTd = document.createElement('td') // Создаем ячейку для номера
+    let numberTd = document.createElement('div') // Создаем ячейку для номера
     numberTd.classList.add('cell-product')
     numberTd.textContent = index + 1; // Устанавливаем номер продукта
-    let nameTd = document.createElement('td')
+    let nameTd = document.createElement('div')
     nameTd.classList.add('cell-product')
-    let quantityTd = document.createElement('td')
+    let quantityTd = document.createElement('div')
     quantityTd.classList.add('cell-product')
-    let priceTd = document.createElement('td')
+    let priceTd = document.createElement('div')
     priceTd.classList.add('cell-product')
-    let totalPriceTd = document.createElement('td')
+    let totalPriceTd = document.createElement('div')
     totalPriceTd.classList.add('cell-product')
-    let settingsTd = document.createElement('td')
+    let settingsTd = document.createElement('div')
     settingsTd.classList.add('cell-product')
     let changeButton = getBtn('Змінити', 'table-btn')
     let deleteButton = getBtn('Видалити', 'table-btn__color')
@@ -138,9 +205,7 @@ function getProductTr(index, product) {
     deleteButton.onclick = () => {
         deleteItem(index);
     }
-    tr.append(numberTd, nameTd, quantityTd, priceTd, totalPriceTd, settingsTd)
-    
-    return tr
+    productTableBody.append(numberTd, nameTd, quantityTd, priceTd, totalPriceTd, settingsTd)
 }
 let productNameInput = getInput('Назва товару', 'text', 'main-input')
 let quantityInput = getInput('Кількість', 'number', 'main-input')
@@ -167,29 +232,73 @@ priceInput.addEventListener('keydown', function(event) {
     }
 });
 
-const renderTable = (products) => {
-    if (products.length > 0) {
-        if (typeof productTable === 'undefined') {
-            productTable = getTable();
-        }
-        if (productTableBody) {
-            productTableBody.remove();
-        }
-        productTableBody = getTableBody();
+const getTotalElem = (allTotalPrice) => {
+    let totalBlock = document.createElement('div')
+    totalBlock.classList.add('total-block')
+    let totalText = document.createElement('h2')
+    totalText.classList.add('total-text')
+    totalText.textContent = 'Підсумкова вартість : ';
+    
+    let totalPriceText = document.createElement('h2')
+    totalPriceText.textContent = allTotalPrice  + ' грн'
+    totalPriceText.classList.add('total-text')
 
-        for (let i = 0; i < products.length; i++) {
-            const productRow = getProductTr(i, products[i]);
-            productTableBody.append(productRow)
-        }
-        productTable.append(productTableBody);
-    } else {
-        productTableBody.remove();
-        productTable.remove();
-        productTableBody = undefined;
-        productTable = undefined;
+    totalBlock.append(totalText, totalPriceText)
+    return totalBlock;
+}
+
+const renderElements = (products) => {
+    let allTotalPrice = 0;
+
+    const isMobile = document.body.clientWidth <= 600;
+
+    if (!isMobile) {
+        getTableHeaders();
     }
+
+    for (let i = 0; i < products.length; i++) {
+        if (!isMobile) {
+            getProductTr(i, products[i]);
+        } else {
+            getTableMobile(i, products[i]);
+        }
+        allTotalPrice += products[i].price * products[i].quantity;
+    }
+
+    totalBlock = getTotalElem(allTotalPrice);
+    block.append(totalBlock)
+};
+
+const renderTable = (products) => {
+    productTableBody.innerHTML = '';
+
+    if (textBlock) {
+        textBlock.remove();
+        textBlock = undefined;
+    }
+    if (totalBlock) {
+        totalBlock.remove();
+        totalBlock = undefined;
+    }
+    if (products.length > 0) {
+        renderElements(products)
+    } else {
+        textBlock = document.createElement('h2')
+        textBlock.textContent = 'Товари не додані'
+        textBlock.classList.add('text-block')
+        block.append(textBlock)
+    }
+       
 };
 
 createButton.onclick = () => {
-    createProduct();
+    createProduct();    
 }
+
+renderTable(allProducts);
+block.append(productTableBody)
+
+window.addEventListener("resize", () => {
+    renderTable(allProducts);
+});
+
