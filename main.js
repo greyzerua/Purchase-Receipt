@@ -17,11 +17,13 @@ let mainTitle = document.createElement('h1')
 mainTitle.textContent = 'Чек покупки'
 mainTitle.classList.add('main-title')
 
-function getInput(placeholder, type, classIpnut) {
+function getInput(placeholder, type, ...classes) {
     let input = document.createElement('input')
     input.placeholder = placeholder
     input.type = type
-    input.classList = classIpnut
+    classes.forEach(className => {
+        input.classList.add(className);
+    });
     return input
 }
 
@@ -98,16 +100,73 @@ function deleteItem(index) {
     saveProductsToLocalStorage();
     renderTable(allProducts);
 }
-const changeItem = (index) => {
-    allProducts[index] = {
-        name: prompt("Введіть назву товару"),
-        quantity: Number(prompt("Введіть кількість товару")),
-        price: Number(prompt("Введіть ціну товару"))
-    };
-    saveProductsToLocalStorage();
-    renderTable(allProducts);
-};
 
+const changeItem = (index) => {
+
+   getModalWindow(index)
+};
+function getModalWindow(index) {
+    let modalBlock = document.createElement('div')
+    modalBlock.classList.add('modal-block', 'fade-in')
+    let iconBlock = document.createElement('div')
+    iconBlock.classList.add('icon-block');
+    let closeIcon = document.createElement('i')
+    closeIcon.classList.add('fas', 'fa-times');
+    let overlay = document.createElement('div')
+    overlay.classList.add('overlay', 'fade-in')
+
+    let productToEdit = allProducts[index];
+
+    let modalProductNameInput = getInput('Назва товару', 'text', 'main-input', '.modal-main__input')
+    let modalQuantityInput = getInput('Кількість', 'number','main-input', '.modal-main__input')
+    let modalPriceInput = getInput('Ціна', 'number', 'main-input', '.modal-main__input')
+    let modalCreateButton = getBtn('Зберегти', 'main-btn', 'modal-main__input')
+    let modalblockInp = getBlock('modal-block__input')
+
+    modalProductNameInput.value = productToEdit.name;
+    modalQuantityInput.value = productToEdit.quantity;
+    modalPriceInput.value = productToEdit.price;
+
+    modalCreateButton.onclick = () => {
+    const editedProductName = modalProductNameInput.value.trim();
+    const editedQuantity = Number(modalQuantityInput.value.trim());
+    const editedPrice = Number(modalPriceInput.value.trim());
+
+    allProducts[index].name = editedProductName;
+    allProducts[index].quantity = editedQuantity;
+    allProducts[index].price = editedPrice;
+
+    
+    renderTable(allProducts);
+    
+    modalBlock.classList.remove('show');
+    overlay.classList.remove('show');
+    setTimeout(() => {
+        modalBlock.remove(); 
+        overlay.remove();    
+        document.body.classList.remove('modal-open');
+    }, 100); 
+    }
+    setTimeout(() => {
+        modalBlock.classList.add('show');
+        overlay.classList.add('show')
+    }, 10);
+    closeIcon.onclick = () => {
+        modalBlock.classList.remove('show');
+        overlay.classList.remove('show');
+        setTimeout(() => {
+            modalBlock.remove(); 
+            overlay.remove();    
+            document.body.classList.remove('modal-open');
+        }, 100); 
+    }
+    modalBlock.append(closeIcon,iconBlock, modalblockInp)
+    modalblockInp.append(modalProductNameInput, modalQuantityInput, modalPriceInput, modalCreateButton)
+    iconBlock.append(closeIcon)
+    block.append(modalBlock)
+    document.body.classList.add('modal-open');
+    document.body.append(overlay)
+}
 function getTableMobile(index, product) {
     let card = document.createElement('div')
     card.classList.add('table-container__mobile')
@@ -134,9 +193,9 @@ function getTableMobile(index, product) {
     let settingsTd = document.createElement('div')
     settingsTd.classList.add('table-cell__mobile')
 
-    let number = document.createElement('div') // Создаем ячейку для номера
+    let number = document.createElement('div') 
     number.classList.add('cell-product__mobile')
-    number.textContent = index + 1; // Устанавливаем номер продукта
+    number.textContent = index + 1;
 
     let name = document.createElement('div')
     name.classList.add('cell-product__mobile')
@@ -169,7 +228,7 @@ function getTableMobile(index, product) {
     price.textContent = product.price +' грн'
     totalPrice.textContent = product.price * product.quantity + ` грн`
     changeButton.onclick = () => {
-        changeItem(index);
+     changeItem(index);
     }
     deleteButton.onclick = () => {
         deleteItem(index);
@@ -181,9 +240,9 @@ function getTableMobile(index, product) {
 
 
 function getProductTr(index, product) {
-    let numberTd = document.createElement('div') // Создаем ячейку для номера
+    let numberTd = document.createElement('div') 
     numberTd.classList.add('cell-product')
-    numberTd.textContent = index + 1; // Устанавливаем номер продукта
+    numberTd.textContent = index + 1; 
     let nameTd = document.createElement('div')
     nameTd.classList.add('cell-product')
     let quantityTd = document.createElement('div')
