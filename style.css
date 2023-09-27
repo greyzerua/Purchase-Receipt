@@ -232,6 +232,9 @@ body.modal-open {
     .total-block{
         width: 70%;
     }
+    .modal-block {
+        width: 40%;
+    }
 }
 @media (max-width: 830px) {
     .block-input {
@@ -263,6 +266,16 @@ body.modal-open {
     .table-btn__color {
         padding: 7px 0px;
         width: 77px;
+    }
+    .modal-block {
+        width: 58%;
+    }
+    .modal-block__input .main-btn {
+        width: 80%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 @media (max-width: 616px) {
@@ -314,6 +327,9 @@ body.modal-open {
     .total-block{
         width: 90%;
     }
+    .modal-block {
+        width: 74%;
+    }
 }
 @media (max-width: 470px) {
     .table-btn{
@@ -330,6 +346,15 @@ body.modal-open {
         width: 98%;
         margin-right: 0px;
         margin-bottom: 6px;
+    }
+    .modal-block__input {
+        width: 100%;
+    }
+    .modal-block__input .main-input {
+        width: unset;
+    }
+    .icon-block{
+        margin-bottom: 13px;
     }
 }
 @media (max-width: 370px) {
