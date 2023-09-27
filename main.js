@@ -126,6 +126,8 @@ function getModalWindow(index) {
     modalProductNameInput.value = productToEdit.name;
     modalQuantityInput.value = productToEdit.quantity;
     modalPriceInput.value = productToEdit.price;
+    
+    
 
     modalCreateButton.onclick = () => {
     const editedProductName = modalProductNameInput.value.trim();
@@ -135,7 +137,14 @@ function getModalWindow(index) {
     allProducts[index].name = editedProductName;
     allProducts[index].quantity = editedQuantity;
     allProducts[index].price = editedPrice;
-
+    let chengedProduct = {
+        name: editedProductName,
+        quantity: editedQuantity,
+        price: editedPrice
+    };
+    if (!editedProductName ||  !editedQuantity || !editedPrice) {
+        return
+    }
     
     renderTable(allProducts);
     
@@ -147,6 +156,7 @@ function getModalWindow(index) {
         document.body.classList.remove('modal-open');
     }, 100); 
     }
+
     setTimeout(() => {
         modalBlock.classList.add('show');
         overlay.classList.add('show')
