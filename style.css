@@ -1,3 +1,7 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Regular.ttf') format('ttf');
+  }
 body {
     background-color: rgb(212 217 255);
 }
@@ -202,11 +206,11 @@ body.modal-open {
 .cell-product{
     border: 1px solid #ddd;
     padding: 5px;
-    font-size: 18px;
+    font-size: 20px;
     display: flex;
     color: black;
     font-weight: 600;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Roboto';
     justify-content: center;
     align-items: center;
 }
@@ -305,7 +309,7 @@ body.modal-open {
         font-size: 20px;
         color: black;
         font-weight: 600;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-family: 'Roboto';
     }
     .cell-product__btn{
         display: flex;
